@@ -1,0 +1,13 @@
+{
+    "name": "opotopo/woocommerce-seller-api-tools",
+    "description": "Сборка зависимостей модуля WooCommerce",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "humbug/php-scoper": "^0.18.20"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

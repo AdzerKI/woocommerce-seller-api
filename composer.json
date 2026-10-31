@@ -1,0 +1,71 @@
+{
+    "name": "opotopo/woocommerce-seller-api",
+    "description": "Выгрузка каталога магазина WooCommerce на площадку ОПОТОПО через Seller API",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "keywords": [
+        "woocommerce",
+        "wordpress",
+        "opotopo",
+        "seller-api",
+        "catalog",
+        "marketplace"
+    ],
+    "support": {
+        "source": "https://github.com/AdzerKI/woocommerce-seller-api"
+    },
+    "require": {
+        "php": "^8.2"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org",
+            "only": [
+                "wpackagist-plugin/*"
+            ]
+        }
+    ],
+    "require-dev": {
+        "composer/installers": "^2.3",
+        "phpunit/phpunit": "^13.0",
+        "roots/wordpress-no-content": "^7.1",
+        "wpackagist-plugin/woocommerce": "^11.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Opotopo\\SellerApi\\WooCommerce\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Opotopo\\SellerApi\\WooCommerce\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "installer-paths": {
+            "vendor/wordpress-plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ]
+        }
+    },
+    "scripts": {
+        "build-deps": [
+            "@composer update --no-interaction --no-progress --working-dir=tools",
+            "@composer update --no-dev --no-interaction --no-progress --working-dir=deps",
+            "@composer reinstall opotopo/seller-api --no-interaction --no-progress --working-dir=deps",
+            "tools/vendor/bin/php-scoper add-prefix --working-dir=deps --output-dir=../vendor-prefixed --force --no-interaction --quiet",
+            "@composer dump-autoload --no-dev --classmap-authoritative --no-interaction --working-dir=vendor-prefixed"
+        ],
+        "post-install-cmd": "@build-deps",
+        "post-update-cmd": "@build-deps"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        },
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
